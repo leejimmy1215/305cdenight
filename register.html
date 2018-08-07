@@ -1,0 +1,667 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery UI Datepicker - Default functionality</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="css/grayscale.min.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
+    <style>
+      .ui-datepicker-trigger{
+        width:30px;
+      }
+      
+      
+      #title{
+          background: url(/img/gray-forest.jpg);
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: 85%;
+          height: 75%;
+          padding: 0;
+      }
+    </style>  
+    <style>
+      .ui-datepicker-trigger{
+        width:30px;
+      }
+      
+      
+      #title{
+          background: url(/img/gray-forest.jpg);
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: 85%;
+          height: 75%;
+          padding: 0;
+      }
+      
+  input {
+      outline: none;
+      border: none;
+  }
+  
+  textarea {
+    outline: none;
+    border: none;
+  }
+  
+  textarea:focus, input:focus {
+    border-color: transparent !important;
+  }
+  
+  input:focus::-webkit-input-placeholder { color:transparent; }
+  input:focus:-moz-placeholder { color:transparent; }
+  input:focus::-moz-placeholder { color:transparent; }
+  input:focus:-ms-input-placeholder { color:transparent; }
+  
+  textarea:focus::-webkit-input-placeholder { color:transparent; }
+  textarea:focus:-moz-placeholder { color:transparent; }
+  textarea:focus::-moz-placeholder { color:transparent; }
+  textarea:focus:-ms-input-placeholder { color:transparent; }
+  
+  input::-webkit-input-placeholder { color: #adadad;}
+  input:-moz-placeholder { color: #adadad;}
+  input::-moz-placeholder { color: #adadad;}
+  input:-ms-input-placeholder { color: #adadad;}
+  
+  textarea::-webkit-input-placeholder { color: #adadad;}
+  textarea:-moz-placeholder { color: #adadad;}
+  textarea::-moz-placeholder { color: #adadad;}
+  textarea:-ms-input-placeholder { color: #adadad;}
+  
+  /*---------------------------------------------*/
+  button {
+      outline: none !important;
+      border: none;
+      background: transparent;
+  }
+  
+  button:hover {
+      cursor: pointer;
+  }
+  
+  iframe {
+      border: none !important;
+  }
+  
+  
+  /*//////////////////////////////////////////////////////////////////
+  [ Utility ]*/
+  .txt1 {
+    font-family: Poppins-Regular;
+    font-size: 13px;
+    color: #666666;
+    line-height: 1.5;
+  }
+  
+  .txt2 {
+    font-family: Poppins-Regular;
+    font-size: 13px;
+    color: #333333;
+    line-height: 1.5;
+  }
+  
+  /*//////////////////////////////////////////////////////////////////
+  [ login ]*/
+  
+  .limiter {
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .container-login100 {
+    width: 100%;  
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background: #f2f2f2;  
+  }
+  
+  .wrap-login100 {
+    width: 390px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 77px 55px 33px 55px;
+  
+    box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+    -o-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+    -ms-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+  }
+  
+  
+  /*------------------------------------------------------------------
+  [ Form ]*/
+  
+  .login100-form {
+    width: 100%;
+  }
+  
+  .login100-form-title {
+    display: block;
+    font-family: Poppins-Bold;
+    font-size: 30px;
+    color: #333333;
+    line-height: 1.2;
+    text-align: center;
+  }
+  .login100-form-title i {
+    font-size: 60px;
+  }
+  
+  /*------------------------------------------------------------------
+  [ Input ]*/
+  
+  .wrap-input100 {
+    width: 100%;
+    position: relative;
+    border-bottom: 2px solid #adadad;
+    margin-bottom: 37px;
+  }
+  
+  .input100 {
+    font-family: Poppins-Regular;
+    font-size: 15px;
+    color: #555555;
+    line-height: 1.2;
+  
+    display: block;
+    width: 100%;
+    height: 45px;
+    background: transparent;
+    padding: 0 5px;
+  }
+  
+  /*---------------------------------------------*/ 
+  .focus-input100 {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+  }
+  
+  .focus-input100::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+  
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+  
+    background: #6a7dfe;
+    background: -webkit-linear-gradient(to right, #21d4fd, #b721ff);
+    background: -o-linear-gradient(to right, #21d4fd, #b721ff);
+    background: -moz-linear-gradient(to right, #21d4fd, #b721ff);
+    background: linear-gradient(to right, #21d4fd, #b721ff);
+  }
+  
+  .focus-input100::after {
+    font-family: Poppins-Regular;
+    font-size: 15px;
+    color: #999999;
+    line-height: 1.2;
+  
+    content: attr(data-placeholder);
+    display: block;
+    width: 100%;
+    position: absolute;
+    top: 16px;
+    left: 0px;
+    padding-left: 5px;
+  
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+  }
+  
+  .input100:focus + .focus-input100::after {
+    top: -15px;
+  }
+  
+  .input100:focus + .focus-input100::before {
+    width: 100%;
+  }
+  
+  .has-val.input100 + .focus-input100::after {
+    top: -15px;
+  }
+  
+  .has-val.input100 + .focus-input100::before {
+    width: 100%;
+  }
+  
+  /*---------------------------------------------*/
+  .btn-show-pass {
+    font-size: 15px;
+    color: #999999;
+  
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    right: 0;
+    padding-right: 5px;
+    cursor: pointer;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+  }
+  
+  .btn-show-pass:hover {
+    color: #6a7dfe;
+    color: -webkit-linear-gradient(to right, #21d4fd, #b721ff);
+    color: -o-linear-gradient(to right, #21d4fd, #b721ff);
+    color: -moz-linear-gradient(to right, #21d4fd, #b721ff);
+    color: linear-gradient(to right, #21d4fd, #b721ff);
+  }
+  
+  .btn-show-pass.active {
+    color: #6a7dfe;
+    color: -webkit-linear-gradient(to right, #21d4fd, #b721ff);
+    color: -o-linear-gradient(to right, #21d4fd, #b721ff);
+    color: -moz-linear-gradient(to right, #21d4fd, #b721ff);
+    color: linear-gradient(to right, #21d4fd, #b721ff);
+  }
+  
+  
+  
+  /*------------------------------------------------------------------
+  [ Button ]*/
+  .container-login100-form-btn {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center !important;
+    padding-top: 13px;
+  }
+  
+  .wrap-login100-form-btn {
+    width: 100%;
+    display: block;
+    position: relative;
+    z-index: 1;
+    border-radius: 25px;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+  
+  .login100-form-bgbtn {
+    position: absolute;
+    z-index: -1;
+    width: 300%;
+    height: 100%;
+    background: #a64bf4;
+    background: -webkit-linear-gradient(to left, #21d4fd, #b721ff, #21d4fd, #b721ff);
+    background: -o-linear-gradient(to left, #21d4fd, #b721ff, #21d4fd, #b721ff);
+    background: -moz-linear-gradient(to left, #21d4fd, #b721ff, #21d4fd, #b721ff);
+    background: linear-gradient(to left, #21d4fd, #b721ff, #21d4fd, #b721ff);
+    top: 0;
+    left: -100%;
+  
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+  }
+  
+  .login100-form-btn {
+    font-family: Poppins-Medium;
+    font-size: 15px;
+    color: #fff;
+    line-height: 1.2;
+    text-transform: uppercase;
+  
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    width: 100%;
+    height: 50px;
+  }
+  
+  .wrap-login100-form-btn:hover .login100-form-bgbtn {
+    left: 0;
+  }
+  
+  
+  /*------------------------------------------------------------------
+  [ Responsive ]*/
+  
+  @media (max-width: 576px) {
+    .wrap-login100 {
+      padding: 77px 15px 33px 15px;
+    }
+  }
+  
+  
+  
+  /*------------------------------------------------------------------
+  [ Alert validate ]*/
+  
+  .validate-input {
+    position: relative;
+  }
+  
+  .alert-validate::before {
+    content: attr(data-validate);
+    position: absolute;
+    max-width: 70%;
+    background-color: #fff;
+    border: 1px solid #c80000;
+    border-radius: 2px;
+    padding: 4px 25px 4px 10px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    right: 0px;
+    pointer-events: none;
+  
+    font-family: Poppins-Regular;
+    color: #c80000;
+    font-size: 13px;
+    line-height: 1.4;
+    text-align: left;
+  
+    visibility: hidden;
+    opacity: 0;
+  
+    -webkit-transition: opacity 0.4s;
+    -o-transition: opacity 0.4s;
+    -moz-transition: opacity 0.4s;
+    transition: opacity 0.4s;
+  }
+  
+  /* .alert-validate::after {
+    content: "\f06a";
+    font-family: FontAwesome;
+    font-size: 16px;
+    color: #c80000;
+  
+    display: block;
+    position: absolute;
+    background-color: #fff;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    right: 5px;
+  } */
+  
+  .alert-validate:hover:before {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  @media (max-width: 992px) {
+    .alert-validate::before {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+  
+  
+  
+  
+    </style>
+  </head>
+
+<body>
+  
+  <!-- Navigation -->
+<!--   <nav class="navbar navbar-expand-lg navbar-light " id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="/index">Start Bootstrap</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fa fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+         <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#about">About</a>
+          </li> 
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="login">Login</a>
+          </li>
+     <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="register">Register</a>
+          </li> 
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+  <div id="title"> -->
+    
+    
+<!--   Register form<div style="text-align: center;">  Register form   </div>  <br/>            
+
+  <div>
+    Username 
+    <input type="text" id="username">
+  </div> 
+  <br/><br/>
+  <div>
+    Password 
+    <input type="password" id="password">
+  </div> 
+  <br/><br/>
+  <div>
+    Confirm Password 
+    <input type="password" id="password2">
+  </div> 
+  <br/><br/>
+  <div>
+    E-Mail 
+    <input type="text" id="Email">
+  </div> 
+  <br/><br/>
+  <div>
+    Confirm E-Mail
+    <input type="text" id="Email2">
+  </div> 
+  <br/><br/>  
+  <div>
+    Phone No. 
+    <input type="text" id="phoneno">
+  </div> 
+  <br/><br/>  
+    <div style="text-align: right;"> <button onclick="abc()">Submit</botton></div><br/><br/> -->
+    
+  
+  <div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100">
+      <form class="login100-form validate-form">
+        <span class="login100-form-title p-b-26">
+          Welcome to Anti-WineClub
+        </span>
+        <span class="login100-form-title p-b-48">
+          <i class="zmdi zmdi-font"></i>
+        </span>
+
+        <div class="wrap-input100 validate-input" >
+<!--           <input kendoTextBox [(ngModel)]="user['username']" class="input100" type="text" name="username"> -->
+              <input type="text" class="form-control" id="username" placeholder="">
+
+          <span class="focus-input100" data-placeholder="username"></span>
+        </div>
+
+        <div class="wrap-input100 validate-input" data-validate="Enter password">
+          <span class="btn-show-pass">
+            <i class="zmdi zmdi-eye"></i>
+          </span>
+<!--           <input kendoTextBox  class="input100" type="password" name="pass" [(ngModel)]="user['password']"> -->
+              <input type="password" class="form-control" id="password" placeholder="">
+          <span class="focus-input100" data-placeholder="Password"></span>
+        </div>
+
+        <div class="wrap-input100 validate-input" data-validate="Enter password">
+          <span class="btn-show-pass">
+            <i class="zmdi zmdi-eye"></i>
+          </span>
+<!--           <input kendoTextBox  class="input100" type="password" name="pass" [(ngModel)]="user['password']"> -->
+              <input type="password" class="form-control" id="password2" placeholder="">
+          <span class="focus-input100" data-placeholder="Confirm Password"></span>
+        </div>
+        
+        <div class="container-login100-form-btn">
+          <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+            <button id="register" class="login100-form-btn trigger_popup_fricc">
+              Register
+            </button>
+           
+          </div>
+        </div>
+        
+ <div class="hover_bkgr_fricc">
+    <span class="helper"></span>
+    <div>
+        <div class="popupCloseButton">X</div>
+        <p>Please enter the correct account and password.</p>
+    </div>
+</div>
+        
+        <div class="text-center p-t-115">
+          <span class="txt1">
+            Already have account?
+          </span>
+
+          <a class="txt2" href="login">
+            Login Now
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!--     Register Form
+<form class="col-md-2 offset-5">
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Username</label>
+    <input type="text" class="form-control" id="username" placeholder="">
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Password</label>
+    <input type="password" class="form-control" id="password" placeholder="">
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Confirm Password</label>
+    <input type="password" class="form-control" id="password2" placeholder="">
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Email address</label>
+    <input type="email" class="form-control" id="Email" placeholder="">
+  </div> 
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Phone</label>
+    <input type="text" class="form-control" id="phone" placeholder="">
+  </div>
+  <div  style="text-align: center;"><button id="register" type="button">Submit</botton></div><br/><br/>
+</form> -->
+    
+    
+    
+<!-- </div> -->
+
+<script>
+    $( document ).ready(function() {
+
+      $("#register").click(function(){
+          var user=document.getElementById("username").value;
+          var PW=document.getElementById("password").value;
+          var PW2=document.getElementById("password2").value;
+
+        if(PW != PW2){
+            alert("Your Password is not match!!");
+          
+        }else{
+          var username = $("#username").val();
+          var password = $("#password").val();
+          localStorage.setItem("username", username);                
+
+
+          mydata="uame="+username+"&pwd="+password;    
+          
+          $.ajax({
+            url: "http://port-9000.305cde-jimmylsp666962607.codeanyapp.com/register", 
+            type: 'POST',
+            data: mydata,
+            success: function(resultReturn)
+            { 
+              //alert("search success");
+              alert(JSON.stringify(resultReturn));
+            },
+            error: function (xhr, textStatus, errorThrown) 
+            {
+              alert("search failed");
+              console.log(textStatus);
+              alert(xhr.responseText);
+            }
+          });
+        }
+          
+        
+        
+      });
+
+
+    });
+
+</script>
+  
+</body>
+
+</html>

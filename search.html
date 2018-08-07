@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="flickr">
+
+<head>
+  <!-- Basic page needs -->
+  <meta charset="utf-8">
+  <!--[if IE]>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <![endif]-->
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Search</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <!-- CSS Style -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <!--script-->
+  <script src="js/lib/angular.min.js"></script>
+  <script src="js/lib/angular-resource.min.js"></script>
+  <script src="js/lib/angular-route.min.js"></script>
+  <script src="js/services.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="js/lib/bootstrap.min.js"></script>
+  <script src="js/controllers/app.js"></script>
+  <script src="js/app.js"></script>
+  <!-- Bootstrap Css -->
+  <link href="bootstrap-assets/css/bootstrap.min.css" rel="stylesheet">
+  <!--CSS-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/animate.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+
+
+  <!--CSS PLUGIN-->
+  <link href="plugins/owl-carousel/owl.carousel.css" rel="stylesheet">
+  <link href="plugins/owl-carousel/owl.theme.css" rel="stylesheet">
+  <link href="plugins/owl-carousel/owl.transitions.css" rel="stylesheet">
+  <link href="plugins/Lightbox/dist/css/lightbox.css" rel="stylesheet">
+  <link href="plugins/Icons/et-line-font/style.css" rel="stylesheet">
+  <link href="plugins/animate.css/animate.css" rel="stylesheet">
+
+  <script>
+    function tableFilter() {
+
+      var input, filter, table, tr, td, i;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    #div1 {
+      margin: 10px 0 0 100px;
+    }
+
+    #uploadTest {
+      margin: 20px 0 0 100px;
+    }
+
+    #search_logo {
+      margin: auto;
+      width: 100%;
+      border: 3px solid grey;
+      padding: 20px;
+      height: 100px;
+      background-color: #808080;
+    }
+
+    .google-search {
+      text-align: center;
+      background: url(img/search.jpg) no-repeat;
+      background-position: 20% 75%;
+      background-size: 150%;
+      height: 200px;
+    }
+
+    .filter-header,
+    #myTable,
+    .filter {
+      padding-top: 20px;
+      text-align: center;
+    }
+
+    #myBtn {
+      display: none;
+/*       position: fixed; */
+      bottom: 20px;
+      right: 30px;
+      z-index: 99;
+      font-size: 18px;
+      border: none;
+      outline: none;
+      background-color: red;
+      color: white;
+      cursor: pointer;
+      padding: 15px;
+      border-radius: 4px;
+    }
+
+    #myBtn:hover {
+      background-color: #555;
+    }
+  </style>
+  <script type="text/javascript" src="js/flickr.js"></script>
+</head>
+<header>
+  <div id="search_logo">
+    <a href="index">
+     <img alt="Wine Club" src="img/winelogo.jpg" style="height:50px; width:50px; color:white;"  title="Wine Club"></a> Anti Wine Club Search Page
+  </div>
+</header>
+
+<body>
+  <br>
+  <!--    <h3 class="container">Upload and identify photos</h3><br />
+       <div id="uploadTest"><form enctype="multipart/form-data" method='post' action="ibm.php">
+         <input name="uploadedfile" type="file" value="choose">
+		 <br>
+         <input type="submit" value="Upload" >
+      </form>
+	  </div>
+ -->
+  <!-- Return to Top -->
+  <a href="javascript:" id="return-to-top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+
+  <!--back to top end-->
+
+  <!--search page-->
+  <section class="google-search">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-12">
+
+          <br />
+          <h3>
+            Search External Information...
+          </h3>
+          <!--google search-->
+          <script>
+            (function() {
+              var cx = '013597934583359890547:icp7sy-o0wk';
+              var gcse = document.createElement('script');
+              gcse.type = 'text/javascript';
+              gcse.async = true;
+              gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(gcse, s);
+            })();
+          </script>
+          <gcse:search></gcse:search>
+          <div class="container" ng-controller="FlickrCtrl">
+            <div ng-view></div>
+          </div>
+        </div>
+        <!--           <div class="col-md-5 col-lg-5">
+          </div> -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- end search -->
+  <!--filter start-->
+  <section class="filter">
+    <table id="myTable">
+      <tr class="filter-header">
+        <h3>
+          Something you may want to know...
+        </h3>
+        <hr class="light-sep">
+            <p>Identify Ingredient of Food - Visual Recognition by IBM Watson API</p>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4 col-lg-4">
+              <div class="card" style=" border:2px solid grey;">
+                <img class="card-img-top" src="img/wine1.jpg" alt="Card image cap"style="width:200px; height:200px;">
+                <div class="card-body">
+                  <h5 class="card-title">Alcolholic drinks</h5>
+                  <p class="card-text">beverage - 0.95<br>food - 0.95<br>soft drink - 0.91<br>birch beer - 0.80<br>Indian red color - 0.64<br>dark red color - 0.62<br>alcoholic beverage - 0.62<br>brew - 0.61<br>
+                    beer - 0.61<br>root beer - 0.61<br>lager beer - 0.57<br>light beer - 0.50</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-lg-4">
+              <div class="card" style="border:2px solid grey;">
+                <img class="card-img-top" src="img/nonalcohol1.jpg" alt="Card image cap"style="width:200px; height:200px;">
+                <div class="card-body">
+                  <h5 class="card-title">Non-Alcolholic drinks</h5>
+                  <p class="card-text">beverage - 0.95<br>food - 0.95<br>soft drink - 0.91<br>reddish orange color - 0.94<br>juice - 0.94<br>orange color - 0.75<br>carrot juice - 0.74<br>papaya juice- 0.52<br>
+                    fruit drink - 0.50<br><br><br></p>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-lg-4">
+              <div class="card" style="border:2px solid grey;">
+                <img class="card-img-top" src="img/orangejuice.jpg" alt="Card image cap" style="width:200px; height:200px;">
+                <div class="card-body">
+                  <h5 class="card-title">Alcolholic drinks</h5>
+                  <p class="card-text">beverage - 0.95<br>food - 0.95<br>reddish orange color - 0.94<br>orange color - 0.90<br>fruit juice - 0.81<br>juice - 0.65<br>nectar - 0.60<br>orangeade - 0.58<br>
+                    frozen orange juice - 0.51<br>fruit drink - 0.50<br><br></p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+       
+        
+        <h3>
+          Question and Answer
+        </h3>
+        <hr class="light-sep">
+            <p>type keywords to view specific paragraph</p>
+        <input type="text" id="myInput" onkeyup="tableFilter()" style="width:300px;" placeholder="Search for content.." title="Input Keyword...">
+
+
+        <br><br>
+      </tr>
+
+
+      <!--     <div class="container">
+      <div class="row">
+        <div class="col-2">
+          
+        </div>
+        <div class="col-8"<
+      </div>
+    </div> -->
+      <tr class="col-mg-12">
+        <td>
+          <div class="panel panel-default ">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#addiction">
+												What is alcohol addiction?
+												<i class="fa fa-angle-right pull-right"></i>
+											</a>
+              </h3>
+            </div>
+            <div id="addiction" class="panel-collapse collapse">
+              <div class="panel-body">
+
+                <p>
+                  Alcohol addiction, also known as alcoholism, is a disease that affects people of all walks of life. Experts have tried to pinpoint factors like genetics, sex, race, or socioeconomics that may predispose someone to alcohol addiction. But it has no single
+                  cause. Psychological, genetic, and behavioral factors can all contribute to having the disease.</p>
+                <p>
+                  It’s important to note that alcoholism is a real disease. It can cause changes to the brain and neurochemistry, so a person with an alcohol addiction may not be able to control their actions.</p>
+                <p>
+                  Alcohol addiction can show itself in a variety of ways. The severity of the disease, how often someone drinks, and the alcohol they consume varies from person to person. Some people drink heavily all day, while others binge drink and then stay sober for
+                  a while.</p>
+                <p>
+                  Regardless of how the addiction looks, someone typically has an alcohol addiction if they heavily rely on drinking and can’t stay sober for an extended period of time.</p>
+                <h4>&nbsp;</h4>
+
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#symptoms">
+												What are the symptoms of alcoholism?
+												<i class="fa fa-angle-right pull-right"></i>
+											</a>
+              </h3>
+            </div>
+            <div id="symptoms" class="panel-collapse collapse">
+              <div class="panel-body">
+
+                <p>
+                  Alcohol addiction can be difficult to recognize. Unlike cocaine or heroin, alcohol is widely available and accepted in many cultures. It’s often at the center of social situations and closely linked to celebrations and enjoyment.</p>
+                <p>
+                  Drinking is a part of life for many people. When is it common in society, it can be hard to tell the difference between someone who likes to have a few drinks now and then and someone with a real problem.</p>
+                <p>
+                  Some symptoms of alcohol addiction are:</p>
+                <p>
+                  。increased quantity or frequency of use</p>
+                <p>
+                  。high tolerance for alcohol, or lack of “hangover” symptoms</p>
+                <P>
+                  。drinking at inappropriate times, such as first thing in the morning, or in places like church or work</p>
+                <p>
+                  。wanting to be where alcohol is present and avoiding situations where there is none</p>
+                <p>
+                  。changes in friendships; someone with an alcohol addiction may choose friends who also drink heavily</p>
+                <p>
+                  。avoiding contact with loved ones</p>
+                <p>
+                  。hiding alcohol, or hiding while drinking</p>
+                <p>
+                  。dependence on alcohol to function in everyday life</p>
+                <p>
+                  。increased lethargy, depression, or other emotional issues</p>
+                <p>
+                  。legal or professional problems such as an arrest or loss of a job</p>
+                <p>
+                  As an addiction tends to get worse over time, it’s important to look for early warning signs. If identified and treated early, someone with an alcohol addiction may be able to avoid major consequences of the disease.</p>
+                <p>
+                  If you’re worried that someone you know has an alcohol addiction, it’s best to approach them in a supportive way. Avoid shaming them or making them feel guilty. This could push them away and make them more resistant to your help.</p>
+                <p>&nbsp;</p>
+
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#health">
+											
+												What health complications are associated with alcoholism?
+												<i class="fa fa-angle-right pull-right"></i>
+											</a>
+              </h3>
+            </div>
+            <div id="health" class="panel-collapse collapse">
+              <div class="panel-body">
+                <p>
+                  Alcohol addiction can result in heart disease and liver disease. Both can be fatal. Alcoholism can also cause:</p>
+                <p>
+                  。ulcers</p>
+                <p>
+                  。diabetes complications</p>
+                <p>
+                  。sexual problems</p>
+                <p>
+                  。birth defects</p>
+                <p>
+                  。bone loss</p>
+                <p>
+                  。vision problems</p>
+                <p>
+                  。increased risk of cancer</p>
+                <p>
+                  。suppressed immune function</p>
+                <p>
+                  If someone with an alcohol addiction takes dangerous risks while drinking, they can also put others at risk. According to the Centers for Disease Control and Prevention (CDC), drunk driving, for example, takes 28 lives every day in the United States.
+                  Drinking is also associated with an increased incidence of suicide and homicide. </p>
+                <p>
+                  These complications are reasons why it’s important to treat alcohol addiction early. Nearly all risks involved with alcohol addiction may be avoidable or treatable, with successful long-term recovery.</P>
+                <p>&nbsp;</p>
+              </div>
+            </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#harm">
+									How to Reduce Harm If You Choose to Drink?
+												<i class="fa fa-angle-right pull-right"></i>
+											</a>
+              </h3>
+            </div>
+            <div id="harm" class="panel-collapse collapse">
+              <div class="panel-body">
+
+                <p>
+                  Alcohol may be regarded as a ‘social lubricant’, especially in festivity. But in fact many people are having a great time with non-alcoholic beverages (e.g. alcohol-free punches, juices, teas and coffees) as alternatives. However, if you choose to drink
+                  alcohol, you need to be aware that</p>
+                <p>
+                  。Do not drink on an empty stomach to prevent quick absorption</p>
+                <p>
+                  。Know your limits and the alcohol content of different kinds of drinks. Choose drinks with lower alcohol content. Reduce alcohol content by adding ice</p>
+                <p>
+                  。Take sips rather than gulps to prevent blood alcohol level from rising quickly</p>
+                <p>
+                  。Do not get into rounds. Drink alcohol-free beverages in between (such as water, fruit juice or soft drinks)</p>
+                <p>
+                  。Never drink and drive. Plan your transport home ahead. Use public transport or designate a non-drinking driver.
+                  <h4>&nbsp;</h4>
+
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </section>
+
+  <button onclick="topFunction()" id="myBtn" class="js-scroll-trigger" title="Go to top">Top</button>
+
+  <!--filter end-->
+
+
+  <!--back to top end-->
+
+  <!--back4app js -->
+  <script src="https://npmcdn.com/parse@1.10.0/dist/parse.min.js"></script>
+  <!-- jquery js -->
+  <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+  <!-- bootstrap js -->
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <!-- owl.carousel.min js -->
+  <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+  <!-- jtv-jtv-mobile-menu js -->
+  <script type="text/javascript" src="js/jtv-mobile-menu.js"></script>
+  <!-- countdown js -->
+  <script type="text/javascript" src="js/countdown.js"></script>
+  <!-- main js -->
+  <script type="text/javascript" src="js/main.js"></script>
+  <!-- rev-slider js -->
+  <script type="text/javascript" src="js/rev-slider.js"></script>
+
+  <!--search transfer text-->
+  <script>
+    var inputTest = document.getElementById('userInput');
+
+    document.getElementById('flickr-search').addEventListener('click', store_data); //Button Click Listener.
+
+    inputTest.addEventListener('keypress', function(key) { // Enter key Press Listener
+      key.which = key.which || key.keyCode;
+      if (key.which == 13) {
+        store_data();
+      }
+    });
+
+    function store_data() { // Store value from input field to local store
+      localStorage.setItem('objectToPass', inputTest.value);
+    }
+  </script>
+  <script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+      scrollFunction()
+    };
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("myBtn").style.display = "block";
+      } else {
+        document.getElementById("myBtn").style.display = "none";
+      }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+  </script>
+
+</body>
+
+</html>

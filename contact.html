@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Basic page needs -->
+<meta charset="utf-8">
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<![endif]-->
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Home</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+
+<!-- Mobile specific metas  -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- CSS Style -->
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/animate.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+<!--CSS PLUGIN-->
+        <link href="css/owl.carousel.css" rel="stylesheet">
+        <link href="css/owl.theme.css" rel="stylesheet">
+        <link href="css/owl.transitions.css" rel="stylesheet">
+        <link href="css/lightbox.css" rel="stylesheet">
+        <link href="css/animate.css" rel="stylesheet">
+<!-- javascript -->
+
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+
+<script src="js/lib/angular.min.js"></script>
+    <script src="js/lib/angular-resource.min.js"></script>
+    <script src="js/lib/angular-route.min.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/lib/bootstrap.min.js"></script>
+    <script src="js/controllers/app.js"></script>
+    <script src="js/app.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+	<style>
+	#google_map {
+      width: 80%;
+      height: 350px;
+      margin-top: 0px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+	</style>
+	<!--map javascript s-->
+<script type="text/javascript"
+          src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAPxam5rwLA5MEDpucUtRyF21O97ztSpsU&sensor=false">
+  </script>
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPxam5rwLA5MEDpucUtRyF21O97ztSpsU&callback=initMap">
+    </script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+
+      /* --- Part (a) --- */
+		var mapCenter = new google.maps.LatLng(22.3905,114.1982); //IVE(ST) Coordinates
+		var map;
+		
+		//Google map option
+		var mapOptions = {
+			disableDefaultUI: true,
+			draggable: false,
+			center:mapCenter, // map center
+			zoom: 16, // zoom level, 0 = earth top view
+			panControl: false, // enable pan Control
+			zoomControl: false, //enable zoom controls
+			disableDoubleClickZoom: true,
+			zoomControlOptions: {
+				style: google.maps.ZoomControlStyle.SMALL //zoom control size
+			},
+			scaleControl: false, // enable scale control
+			mapTypeId: google.maps.MapTypeId.ROADMAP // google map type
+		};
+		
+	map = new google.maps.Map(document.getElementById("google_map"),mapOptions);
+
+    var marker1 = new google.maps.Marker({
+							position: mapCenter,//map Coordinates where user right clicked
+							map: map,
+							draggable: false, //set marker draggable
+							title:"Company Location"
+							//icon: "icon/pin_red.png" //custom pin icon
+						});
+	var contentString1 = "<div style='width:200'>ShaTin IVE <br>Latitude = 22.3905"+
+			"<br />" +
+			"Longitude = 114.1982</div>"
+	//Create an infoWindow
+	var infowindow1 = new google.maps.InfoWindow({
+		content: contentString1
+	});
+		
+	marker1.addListener('click', function() {
+    infowindow1.open(map, marker1);
+  });
+      /* --- Part (b) --- */
+	google.maps.event.addListener(map, 'rightclick', function(e){
+			//create marker
+			var marker = new google.maps.Marker({
+							position: e.latLng,//map Coordinates where user right clicked
+							map: map,
+							draggable: false, //set marker draggable
+							animation: google.maps.Animation.DROP,// bounce animation
+							title:"My Selected Location",
+							icon: "icon/pin_red.png" //custom pin icon
+						});
+			google.maps.event.addListener(marker, 'dblclick', function(){
+				marker.setMap(null);
+			});
+
+
+
+
+        /* --- Part (c) --- */
+
+		//Content structure of info Window for the Markers
+		
+		var contentString = "<div style='width:200'>Latitude = " + e.latLng.lat().toFixed(4)+
+							"<br />" +
+							"Longitude = " + e.latLng.lng().toFixed(4) +
+							"</div>";
+		//Create an infoWindow
+		var infowindow = new google.maps.InfoWindow({
+			content: contentString
+		});
+		
+		//add Click event Listener to marker which will open infoWindow
+	google.maps.event.addListener(marker, 'click', function() {
+			infowindow.open(map, marker);//click on marker opens info window
+		});
+      });
+
+    });
+  </script>
+  </head>
+<body class="cms-index-index cms-home-page">
+
+<!-- mobile menu -->
+<div id="jtv-mobile-menu">
+  <ul>
+    <li>
+      
+      
+		<!-- search page
+		<form id="search1" name="search">
+          <div class="input-group">
+            <div class="input-group-btn">
+              <button class="btn btn-default" type="submit"><i class="fa fa-search"></i> </button>
+            </div>
+            <input type="text" class="form-control simple" placeholder="Search ..." name="srch-term" id="srch-term">
+          </div>
+		  </form>
+		-->
+      
+    
+      <ul>
+    <li><a href="index.html">Home</a> </li> 
+	 <li><a href="index.html#bestsell">BEST SELLING</a> </li> 
+    <li><a href="contact.html">CONTACT</a> </li> 
+	<li><a href="search.html">SEARCH</a> </li> 
+	<li><a href="login.html">Login</a> </li> 
+      </ul>
+    </li>
+ 
+    </ul>
+
+</div>
+<div id="page"> 
+ 
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="header-top">
+        <div class="container">
+          <div class="row"> 
+            
+            <div class="col-xs-6 col-sm-6 welcome-msg-control">
+              <div class="welcome-msg">Welcome to Organic! </div>
+             
+            </div>
+            <div class="col-xs-6 col-sm-6 jtv-top-links-control"> 
+              <!-- Header Top Links -->
+              <div class="jtv-top-links">
+                <div class="links">
+                  <ul>
+                    <li> <a title="Checkout" href="#"><span class="hidden-xs">My Account</span></a> </li>
+
+                    <li> <a href="login.html"><i class="fa fa-user"></i><span class="hidden-xs" name="username"> Log In</span></a> </li>
+                  </ul>
+                </div>
+              </div>
+              <!-- End Header Top Links --> 
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+          </div>
+          <div class="col-lg-6 col-md-4 col-sm-4 col-xs-12 jtv-logo-box"> 
+            <!-- Header Logo -->
+            <div class="logo"> <h1><a title="eCommerce" href="index.html"><img alt="eCommerce" src="images/logo.png"> </a></h1> </div>
+            <!-- End Header Logo --> 
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 hidden-xs">
+            
+
+				
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- end header --> 
+  
+  <!-- Navigation -->
+  
+  <nav>
+    <div class="container">
+      <div class="mm-toggle-wrap">
+        <div class="mm-toggle"><i class="fa fa-align-justify"></i><span class="mm-label">Menu</span> </div>
+      </div>
+      <div class="nav-inner"> 
+        <!-- BEGIN NAV -->
+        <ul id="nav" class="hidden-xs">
+        <li class="drop-menu"><a href="index.html" class="level-top active"><span><i class="fa fa-home"></i>Home</span></a> </li> 
+       <li class="drop-menu"> <a href="index.html#bestsell"> <span>BEST SELLING</span> </a></li> 
+	    <li class="drop-menu"> <a href="search.html"> <span>Search</span> </a></li> 
+       <li class="drop-menu"> <a href="contact.html"> <span>Contact</span> </a></li> 
+	   
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- end nav --> 
+	
+
+	
+    <!-- Contact Us-->
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <hr class="light-sep">
+            <p>Get In Touch</p>
+			
+				<!--map-->
+				<div id="google_map"></div>
+				<!--MAP END-->
+			<div class = "row">
+            <div class="col-md-8 wow fadeInUp" data-wow-delay=".3s">
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="Name" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="Email" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" name="message" rows="3" placeholder="Message"></textarea>
+                    </div>
+                    <a href="#" class="btn-block">Send</a>
+                </form>
+            </div>
+			<div class="col-md-3 col-md-offset-1">
+					<address>
+						<span>Our Address</span>
+						<p>
+							Organic (Sha Tin)<br>
+							21 Yuen Wo Road<br>
+							Sha Tin, N.T.
+						</p>
+					</address>
+					<address>
+						<span>Email</span>
+						<p>admin@eldventure.com.hk</p>
+					</address>
+					<address>
+						<span>Phone</span>
+						<p>8888 8888</p>
+					</address>
+				</div>
+			</div>
+        </div>
+    </section>
+    <!-- Contact Us END-->
+  
+
+<!-- jquery js --> 
+<script type="text/javascript" src="js/jquery.min.js"></script> 
+
+<!-- bootstrap js --> 
+<script type="text/javascript" src="js/bootstrap.min.js"></script> 
+
+<!-- owl.carousel.min js --> 
+<script type="text/javascript" src="js/owl.carousel.min.js"></script> 
+
+<!-- jtv-jtv-mobile-menu js --> 
+<script type="text/javascript" src="js/jtv-mobile-menu.js"></script> 
+
+<!-- countdown js --> 
+<script type="text/javascript" src="js/countdown.js"></script> 
+
+<!-- main js --> 
+<script type="text/javascript" src="js/main.js"></script> 
+
+
+<script type='text/javascript'>
+jQuery(document).ready(function() {
+jQuery('#jtv-rev_slider').show().revolution({
+dottedOverlay: 'none',
+delay: 5000,
+startwidth: 1140,
+startheight: 500,
+hideThumbs: 200,
+thumbWidth: 200,
+thumbHeight: 50,
+thumbAmount: 2,
+navigationType: 'thumb',
+navigationArrows: 'solo',
+navigationStyle: 'round',
+touchenabled: 'on',
+onHoverStop: 'on',
+swipe_velocity: 0.7,
+swipe_min_touches: 1,
+swipe_max_touches: 1,
+drag_block_vertical: false,
+spinner: 'spinner0',
+keyboardNavigation: 'off',
+navigationHAlign: 'center',
+navigationVAlign: 'bottom',
+navigationHOffset: 0,
+navigationVOffset: 20,
+soloArrowLeftHalign: 'left',
+soloArrowLeftValign: 'center',
+soloArrowLeftHOffset: 20,
+soloArrowLeftVOffset: 0,
+soloArrowRightHalign: 'right',
+soloArrowRightValign: 'center',
+soloArrowRightHOffset: 20,
+soloArrowRightVOffset: 0,
+shadow: 0,
+fullWidth: 'on',
+fullScreen: 'off',
+stopLoop: 'off',
+stopAfterLoops: -1,
+stopAtSlide: -1,
+shuffle: 'off',
+autoHeight: 'off',
+forceFullWidth: 'on',
+fullScreenAlignForce: 'off',
+minFullScreenHeight: 0,
+hideNavDelayOnMobile: 1500,
+hideThumbsOnMobile: 'off',
+hideBulletsOnMobile: 'off',
+hideArrowsOnMobile: 'off',
+hideThumbsUnderResolution: 0,
+hideSliderAtLimit: 0,
+hideCaptionAtLimit: 0,
+hideAllCaptionAtLilmit: 0,
+startWithSlide: 0,
+fullScreenOffsetContainer: ''
+});
+});
+</script> 
+<!--JS--> 
+  
+<!--back4app js --> 
+	<script src="https://npmcdn.com/parse@1.10.0/dist/parse.min.js"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="js/tether.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/wow.min.js"></script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- JS PLUGINS -->
+
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.countTo.js"></script>
+    <script src="js/jquery.inview.min.js"></script>
+    <script src="js/lightbox.min.js"></script>
+    <script src="js/wow.min.js"></script>
+
+	
+	<script type='text/javascript'>
+	// Parse Initialize
+	var app_id = "MNHlwqykaB2I3pHsXAFlOoJlZ92uLggHzyPGKSVG";
+	var javascript_key = "29XjgrXROWLoxOU27XAltcLZPxRxBkGwGJs5yUWg";
+	Parse.initialize(app_id, javascript_key);
+	Parse.serverURL = 'https://parseapi.back4app.com';
+
+	jQuery(document).ready(function() {	
+		
+		var user = window.localStorage.getItem("user");
+		
+		if (user == null || user == undefined || user == '' || user == 'null'){
+			$('#username').html("Log in");
+		} else {
+			console.log(user);
+			$('#username').html( user + " Welcome, click here to log out");
+		}
+		
+		$('#logout').click(function(){
+		if (user != "null"){
+			window.localStorage.setItem("user", "null");
+			$('#username').html("Log in");
+			user = "null";
+		FB.logout(function(response) {
+	  
+		});
+		} else{
+			window.location.href = 'http://eldventure.com/A4/login.html';
+		}
+			
+		
+		});
+		
+		
+	//post
+	 $("form").submit(function(event){
+		event.preventDefault();
+		var Feedback = Parse.Object.extend("Feedback");
+		var Name = $("input[name='Name']:checked").val();
+		var Email = $("input[name='Email']:checked").val();
+		var message = $("textarea[name='message']").val();
+
+		feedb = new Feedback();
+		feedb.set("name", Name);
+		feedb.set("age", Email);
+		feedb.set("comment", message);
+
+		feedb.save(null, {
+			success: function (res) {
+				console.log(res);
+			},
+			error: function (response, error) {
+				console.log('Error: ' + error.message);
+			}
+		});
+	});
+		
+		
+		
+	});
+</script> 
+
+</body>
+</html>

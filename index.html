@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Anti-wineclub</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+<!--     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> -->
+    <!-- Custom styles for this template -->
+    <link href="css/grayscale.min.css" rel="stylesheet">
+
+    
+    
+<!-- CSS Style -->
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/animate.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+<!--CSS PLUGIN-->
+        <link href="css/owl.carousel.css" rel="stylesheet">
+        <link href="css/owl.theme.css" rel="stylesheet">
+        <link href="css/owl.transitions.css" rel="stylesheet">
+        <link href="css/lightbox.css" rel="stylesheet">
+        <link href="css/animate.css" rel="stylesheet">
+<!-- javascript -->
+
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/customlist.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function(){
+
+        Typed.new("#typed", {
+            stringsElement: document.getElementById('typed-strings'),
+            typeSpeed: 30,
+            backDelay: 500,
+            loop: false,
+            contentType: 'html', // or text
+            // defaults to null for infinite loop
+            loopCount: null,
+            callback: function(){ foo(); },
+
+        });
+
+        var resetElement = document.querySelector('.reset');
+        if(resetElement) {
+            resetElement.addEventListener('click', function() {
+                document.getElementById('typed')._typed.reset();
+            });
+        }
+
+    });
+
+    function foo(){ console.log("Callback"); }
+    </script>
+
+<script src="js/lib/angular.min.js"></script>
+    <script src="js/lib/angular-resource.min.js"></script>
+    <script src="js/lib/angular-route.min.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/lib/bootstrap.min.js"></script>
+    <script src="js/controllers/app.js"></script>
+    <script src="js/app.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+	<style>
+	#google_map {
+      width: 80%;
+      height: 350px;
+      margin-top: 0px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+	</style>
+	<!--map javascript s-->
+<!-- <script type="text/javascript"
+          src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAPxam5rwLA5MEDpucUtRyF21O97ztSpsU&sensor=false">
+  </script> -->
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPxam5rwLA5MEDpucUtRyF21O97ztSpsU&callback=initMap">
+    </script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+
+      /* --- Part (a) --- */
+		var mapCenter = new google.maps.LatLng(22.2763,114.1777); //Coordinates
+		var map;
+		
+		//Google map option
+		var mapOptions = {
+			disableDefaultUI: true,
+			draggable: false,
+			center:mapCenter, // map center
+			zoom: 16, // zoom level, 0 = earth top view
+			panControl: false, // enable pan Control
+			zoomControl: false, //enable zoom controls
+			disableDoubleClickZoom: true,
+			zoomControlOptions: {
+				style: google.maps.ZoomControlStyle.SMALL //zoom control size
+			},
+			scaleControl: false, // enable scale control
+			mapTypeId: google.maps.MapTypeId.ROADMAP // google map type
+		};
+		
+	map = new google.maps.Map(document.getElementById("google_map"),mapOptions);
+
+    var marker1 = new google.maps.Marker({
+							position: mapCenter,//map Coordinates where user right clicked
+							map: map,
+							draggable: false, //set marker draggable
+							title:"Company Location"
+							//icon: "icon/pin_red.png" //custom pin icon
+						});
+	var contentString1 = "<div style='width:200'>Hong Kong Coventry<br>Latitude = 22.2763"+
+			"<br />" +
+			"Longitude = 114.1777</div>"
+	//Create an infoWindow
+	var infowindow1 = new google.maps.InfoWindow({
+		content: contentString1
+	});
+		
+	marker1.addListener('click', function() {
+    infowindow1.open(map, marker1);
+  });
+      /* --- Part (b) --- */
+	google.maps.event.addListener(map, 'rightclick', function(e){
+			//create marker
+			var marker = new google.maps.Marker({
+							position: e.latLng,//map Coordinates where user right clicked
+							map: map,
+							draggable: false, //set marker draggable
+							animation: google.maps.Animation.DROP,// bounce animation
+							title:"My Selected Location",
+							icon: "icon/pin_red.jpg" //custom pin icon
+						});
+			google.maps.event.addListener(marker, 'dblclick', function(){
+				marker.setMap(null);
+			});
+
+        /* --- Part (c) --- */
+
+		//Content structure of info Window for the Markers
+		
+		var contentString = "<div style='width:200'>Latitude = " + e.latLng.lat().toFixed(4)+
+							"<br />" +
+							"Longitude = " + e.latLng.lng().toFixed(4) +
+							"</div>";
+		//Create an infoWindow
+		var infowindow = new google.maps.InfoWindow({
+			content: contentString
+		});
+		
+		//add Click event Listener to marker which will open infoWindow
+	google.maps.event.addListener(marker, 'click', function() {
+			infowindow.open(map, marker);//click on marker opens info window
+		});
+      });
+
+    });
+  </script>
+     <script>
+
+  function checkLogin() {
+    FB.getLoginStatus(function(response) {
+      checkStatusChange(response);
+    });
+  }
+  
+  function checkStatusChange(response) {   
+    if (response.status === 'connected') {      
+		callAPI();
+    } else {     
+		document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
+    }
+  }
+   function callAPI() {
+	FB.api('/me', function(response) {
+	document.getElementById('status').innerHTML = 'Thanks for logging in, ' +response.name+ '!';
+	});
+	FB.api('/me?fields=picture',function(response) {
+		var x =document.getElementById("img");
+		x.setAttribute("src", response.picture.data.url);
+	});
+
+   }
+  
+  function logout() {
+		FB.logout(function(response) {
+		document.getElementById('status').innerHTML = 'Logout Complete. Please log' + ' into this app.';
+		var x =document.getElementById("img");
+		x.setAttribute("src", response.remove);
+	});
+  }
+  
+
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '235339177106020',
+      cookie     : true, 
+      xfbml      : true,  
+      version    : 'v3.1' 
+    });
+
+    FB.getLoginStatus(function(response) {
+      checkStatusChange(response);
+    });
+  };
+
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+  
+function loginAndPost() {
+	FB.login(function(){
+	//var input1 = document.getElementById("input").value;
+	FB.api('/me/feed', 'post', {message: document.getElementById('input').src + " Thanks for sharing the best selling products. Our company can offer discounts to you!"}); // your textbox content });
+	}, {scope: 'publish_actions'});
+  }
+
+</script>
+  </head>
+
+  <body id="page-top">
+
+    <!--NAV BAR-->
+<!--         <section class="main-header">
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#page-top"><img src="img/winelogo.png" class="img-responsive" alt="logo"></a>
+                    </div>
+                    <div class="collapse navbar-collapse text-center" id="bs-example-navbar-collapse-1">
+                        <div class="col-md-8 col-xs-12 nav-wrap">
+                            <ul class="nav navbar-nav">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="#about">About</a></li>
+                                <li><a href="#contact" >Contact</a></li>
+								<li><a href="#"class="hidden-lg hidden-md"data-toggle="modal" data-target="#modal1" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</a></li>
+                                <li><a href="show_product.php"class="hidden-lg hidden-md">Checkout</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </nav>
+
+        </section> -->
+
+    
+    <!-- Navigation -->
+    <section class="main-header">
+    <nav class="navbar navbar-expand-lg navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+        <a class="navbar-brand js-scroll-trigger text-grey" href="#page-top"><img src="img/winelogo.jpg" style="width:40px; height:40px;" class="img-responsive"></a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse text-center" id="navbarResponsive">
+          <div class="col-md-8 col-xs-12 nav-wrap">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger text-white" href="#services">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger text-white" href="#process">Favorite</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger text-white" href="#contact">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger text-white" href="/search">Search</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger text-white" href="/login">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+        </div>
+      </div>
+    </nav>
+</section>
+    <!-- Intro Header -->
+    <header class="masthead">
+      <div class="intro-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 mx-auto">
+              <section id="contact_header">
+               <div class="wrap">
+                 <h3>Anti-wineclub</h3>
+
+                   <div class="type-wrap">
+                   <div id="typed-strings">
+                    <span>Always do <strong>MORE</strong> than required.</span>
+                    <h2>We can help you to <em>stop drinking</em>.</h2>
+
+            </div>
+            <span id="typed" style="white-space:pre;"></span>
+        </div>
+    </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    
+    <!-- Service of BOSS DESSERT -->
+    <section id="services">
+        <div class="container">
+            <h2>About Alcoholism</h2>
+            <hr class="light-sep">
+            <p>Reasons why people drink</p>
+            <div class="services-box">
+                <div class="row wow fadeInUp" data-wow-delay=".6s">
+                    <div class="col-md-4">
+					<div class="service">
+						<div class="icon-holder">
+							<i class="icon fas fa-capsules fa-2x" aria-hidden="true"></i>
+						</div>
+						<h4 class="heading">Overcome anxiety</h4>
+						<p class="description">Some people are naturally anxious, causing them to perpetually worry. Drinking lowers an individual’s inhibitions and makes them more comfortable in social situations. Over time though, this can lead to addictive behaviors.</p>
+					</div>
+				</div>
+                    <div class="col-md-4">
+					<div class="service">
+						<div class="icon-holder">
+							<i class="icon fas fa-capsules fa-2x" aria-hidden="true"></i>
+						</div>
+						<h4 class="heading">Relieve stress</h4>
+						<p class="description">Relying on alcohol to reduce daily life stressors can impact the likelihood of developing alcoholism. Since alcohol is a depressant and a sedative, drinking produces feelings of pleasure. However, frequent drinking builds tolerance, requiring you to consume more alcohol in order to achieve the same effects.</p>
+					</div>
+				</div>
+					<div class="col-md-4">
+					<div class="service">
+						<div class="icon-holder">
+							<i class="icon fas fa-capsules fa-2x" aria-hidden="true"></i>
+						</div>
+						<h4 class="heading">Cope with loss</h4>
+						<p class="description">Losing a family member or friend can take a toll on you emotionally, physically and mentally. Alcohol can ease the grief you are feeling and is used to get through difficult times. Depending on alcohol, even temporarily, can spiral into a drinking problem.</p>
+					</div>
+				</div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--SERVICE END-->
+
+    <!-- Fav Content -->
+    <section id="process">
+        <div class="container">
+            <h2>Ways to stop alcoholism</h2>
+            <hr class="light-sep">
+            <p>Welcome to share videos to social platform.</p>
+          
+    <div class="container text-center">
+      
+<!--         <!--upload content to facebook--> 
+      
+<!--        <fb:login-button scope="public_profile,email" onlogin="checkLogin();"> 
+       </fb:login-button> 
+       <button onclick="logout();">OUT</button> 
+       <br />
+       <br /> 
+       <img id="img" /> 
+       <div id="status" class="jtv-decs-text"> 
+       </div> 
+       <hr />   -->
+      
+      <div class="row">
+        <div class="fav-item col-md-4 mx-auto">
+          
+          <h5 class="title" link="https://www.youtube.com/embed/CrTlI6seM0A">Alcoholism in School Affects Student</h5>
+            <div class="embed-responsive embed-responsive-16by9 mb-2">
+              <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/CrTlI6seM0A" allowfullscreen></iframe>
+            </div>
+            <button class=" fav-list fav-btn btn btn-secondary" href="javascript:;">
+              Add Fav
+            </button>
+          <br>
+          <div id="shareBtn1" class="btn btn-success clearfix">Share To Facebook</div>
+
+          <!--==========================================-->
+<!--           <br />
+            <button onclick="loginAndPost()">Share on facebook</button> 
+            <br />  -->
+            <!--upload finish -->
+          
+        </div>
+        <div class="fav-item col-md-4 mx-auto">
+          <h5 class="title" link="https://www.youtube.com/embed/PLxa11E_FH8">How To Stop Drinking Alcohol</h5>
+          <div class="embed-responsive embed-responsive-16by9 mb-2">
+              <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/PLxa11E_FH8" allowfullscreen></iframe>
+            </div>
+          <button class="fav-list fav-btn btn btn-secondary" href="javascript:;">
+            Add Fav
+          </button>
+          <br>
+          <div id="shareBtn2" class="btn btn-success clearfix">Share to Facebook</div>
+        </div>
+              
+
+        <div class="fav-item col-md-4 mx-auto">
+          <h5 class="title" link="https://www.youtube.com/embed/-fBG8xcZoF4">Effects Of Alcohol On The Brain</h5>
+          <div class="embed-responsive embed-responsive-16by9 mb-2">
+              <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/-fBG8xcZoF4" allowfullscreen></iframe>
+            </div>
+          <button class="fav-list fav-btn btn btn-secondary" href="javascript:;">
+            Add Fav
+          </button>
+          <br>
+          <div id="shareBtn3" class="btn btn-success clearfix">Share To Facebook</div>
+        </div>
+       
+<!--         <div id="shareBtn3" class="btn btn-success clearfix">Share</div> -->
+      </div>
+          </div>
+      </div>
+      
+  </section>
+      
+      <!-- All Fav Content -->
+      
+<!--       <div class="hover_bkgr_fricc">
+    <span class="helper"></span>
+       <div>
+          <div class="popupCloseButton">X</div>
+            <div id="allfav" class="row text-center mt-3" style="color:#000;">
+               <ul class="list-group w-100"></ul>
+            </div>
+      </div>
+    </div> -->
+    <section id="allfavlist">
+      <h2>
+        Arrange your favourite list
+      </h2>
+      <hr class="light-sep">
+      <div id="allfav" class="row text-center mt-3" style="color:#000;">
+        <ul class="list-group w-100"></ul>
+      </div>
+    </section>
+
+<!--     </div> -->
+<!--     <div id="todo">
+        <div id="header">
+            <h3>ToDo List</h3>
+            <i class="fa fa-plus fa-2x add" aria-hidden="true"></i>
+        </div>
+        <input type="text" placeholder="Enter a task">
+        <ul></ul>
+    </div>
+ -->
+
+    <!--sample work-->
+    <section id="portfolio">
+        <div class="container-fluid">
+            <h2>Anti Alcohol Slogans</h2>
+            <hr class="light-sep">
+            <p>Here is a list of some anti drinking slogans that we’ve collected. Try to see which one would have a stronger emotional impact that can help jolt the reader into making a positive change?</p>
+            <div class="row">
+                <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay=".8s">
+                    <a class="portfolio-box" href="img/slogan1.jpg" data-lightbox="image-1" data-title="slogan">
+                        <img src="img/slogan1.jpg" class="img-responsive" alt="1">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    You’re no punk so don’t drive drunk.
+                                </div>
+                                <div class="project-name">
+                                    You can, if you think you can
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay=".8s">
+                    <a href="img/slogan2.jpg" class="portfolio-box" data-lightbox="image-2" data-title="slogan">
+                        <img src="img/slogan2.jpg" class="img-responsive" alt="2">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    Under the influence, under arrest.
+                                </div>
+                                <div class="project-name">
+                                    Try not place conditions on your sobriety
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay=".8s">
+                    <a href="img/slogan3.jpg" class="portfolio-box" data-lightbox="image-3" data-title="slogan">
+                        <img src="img/slogan3.jpg" class="img-responsive" alt="3">
+                        <div class="portfolio-box-caption">
+                            <div class="portfolio-box-caption-content">
+                                <div class="project-category text-faded">
+                                    To stay out of the slammer, don’t get hammered
+                                </div>
+                                <div class="project-name">
+                                    Throw it away before it throws you away
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    <!--sample work END-->
+
+
+
+    <!-- Contact Section -->
+<!--     <section id="contact" class="content-section text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2>Contact Start Bootstrap</h2>
+            <p>Feel free to leave us a comment on the
+              <a href="http://startbootstrap.com/template-overviews/grayscale/">Grayscale template overview page</a>
+              on Start Bootstrap to give some feedback about this theme!</p>
+            <ul class="list-inline banner-social-buttons">
+              <li class="list-inline-item">
+                <a href="https://twitter.com/SBootstrap" class="btn btn-default btn-lg">
+                  <i class="fa fa-twitter fa-fw"></i>
+                  <span class="network-name">Twitter</span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://github.com/BlackrockDigital/startbootstrap" class="btn btn-default btn-lg">
+                  <i class="fa fa-github fa-fw"></i>
+                  <span class="network-name">Github</span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://plus.google.com/+Startbootstrap/posts" class="btn btn-default btn-lg">
+                  <i class="fa fa-google-plus fa-fw"></i>
+                  <span class="network-name">Google+</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section> -->
+
+    <!-- Map Section -->
+<!--     <div id="map"></div> -->
+
+   <!-- Contact Us-->
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <hr class="light-sep">
+            <p>Get In Touch</p>
+			
+				<!--map-->
+				<div id="google_map"></div>
+				<!--MAP END-->
+			<div class = "row">
+            <div class="col-md-8 wow fadeInUp" data-wow-delay=".3s">
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="Name" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="Email" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" name="message" rows="3" placeholder="Message"></textarea>
+                    </div>
+                    <a href="#" class="btn-block">Send</a>
+                </form>
+            </div>
+			<div class="col-md-3 col-md-offset-1">
+					<address>
+						<span>Our Address</span>
+						<p>
+							WineClub (ML)<br>
+							21 Yuen Wo Road<br>
+							WanChai
+						</p>
+					</address>
+					<address>
+						<span>Email</span>
+						<p>admin@wineclub.com.hk</p>
+					</address>
+					<address>
+						<span>Phone</span>
+						<p>8888 8888</p>
+					</address>
+				</div>
+			</div>
+        </div>
+    </section>
+    <!-- Contact Us END-->
+  
+   <!-- facebook js-->
+   <script>
+document.getElementById('shareBtn1').onclick = function() {
+  FB.ui({
+    method: 'share',
+    display: 'popup',
+    hashtag:'#project',
+    href: 'https://www.youtube.com/embed/CrTlI6seM0A',
+  }, function(response){});
+}
+</script>
+      <!-- facebook js-->
+   <script>
+document.getElementById('shareBtn2').onclick = function() {
+  FB.ui({
+    method: 'share',
+    display: 'popup',
+    hashtag:'#project',
+    href: 'https://www.youtube.com/embed/PLxa11E_FH8',
+  }, function(response){});
+}
+</script>
+      <!-- facebook js-->
+   <script>
+document.getElementById('shareBtn3').onclick = function() {
+  FB.ui({
+    method: 'share',
+    display: 'popup',
+    hashtag:'#project',
+    href: 'https://www.youtube.com/embed/-fBG8xcZoF4',
+  }, function(response){});
+}
+</script>
+
+<!-- jquery js --> 
+<script type="text/javascript" src="js/jquery.min.js"></script> 
+
+<!-- bootstrap js --> 
+<script type="text/javascript" src="js/bootstrap.min.js"></script> 
+
+<!-- owl.carousel.min js --> 
+<script type="text/javascript" src="js/owl.carousel.min.js"></script> 
+
+<!-- jtv-jtv-mobile-menu js --> 
+<script type="text/javascript" src="js/jtv-mobile-menu.js"></script> 
+
+<!-- countdown js --> 
+<script type="text/javascript" src="js/countdown.js"></script> 
+
+<!-- main js --> 
+<script type="text/javascript" src="js/main.js"></script> 
+
+<script type="text/javascript">
+    $(window).load(function () {
+    $(".trigger_popup_fricc").click(function(){
+       $('.hover_bkgr_fricc').show();
+    });
+    $('.hover_bkgr_fricc').click(function(){
+        $('.hover_bkgr_fricc').hide();
+    });
+    $('.popupCloseButton').click(function(){
+        $('.hover_bkgr_fricc').hide();
+    });
+});
+    </script>
+<script type='text/javascript'>
+jQuery(document).ready(function() {
+jQuery('#jtv-rev_slider').show().revolution({
+dottedOverlay: 'none',
+delay: 5000,
+startwidth: 1140,
+startheight: 500,
+hideThumbs: 200,
+thumbWidth: 200,
+thumbHeight: 50,
+thumbAmount: 2,
+navigationType: 'thumb',
+navigationArrows: 'solo',
+navigationStyle: 'round',
+touchenabled: 'on',
+onHoverStop: 'on',
+swipe_velocity: 0.7,
+swipe_min_touches: 1,
+swipe_max_touches: 1,
+drag_block_vertical: false,
+spinner: 'spinner0',
+keyboardNavigation: 'off',
+navigationHAlign: 'center',
+navigationVAlign: 'bottom',
+navigationHOffset: 0,
+navigationVOffset: 20,
+soloArrowLeftHalign: 'left',
+soloArrowLeftValign: 'center',
+soloArrowLeftHOffset: 20,
+soloArrowLeftVOffset: 0,
+soloArrowRightHalign: 'right',
+soloArrowRightValign: 'center',
+soloArrowRightHOffset: 20,
+soloArrowRightVOffset: 0,
+shadow: 0,
+fullWidth: 'on',
+fullScreen: 'off',
+stopLoop: 'off',
+stopAfterLoops: -1,
+stopAtSlide: -1,
+shuffle: 'off',
+autoHeight: 'off',
+forceFullWidth: 'on',
+fullScreenAlignForce: 'off',
+minFullScreenHeight: 0,
+hideNavDelayOnMobile: 1500,
+hideThumbsOnMobile: 'off',
+hideBulletsOnMobile: 'off',
+hideArrowsOnMobile: 'off',
+hideThumbsUnderResolution: 0,
+hideSliderAtLimit: 0,
+hideCaptionAtLimit: 0,
+hideAllCaptionAtLilmit: 0,
+startWithSlide: 0,
+fullScreenOffsetContainer: ''
+});
+});
+</script> 
+<!--JS--> 
+  
+<!--back4app js --> 
+	<script src="https://npmcdn.com/parse@1.10.0/dist/parse.min.js"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="js/tether.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/wow.min.js"></script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- JS PLUGINS -->
+
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.countTo.js"></script>
+    <script src="js/jquery.inview.min.js"></script>
+    <script src="js/lightbox.min.js"></script>
+    <script src="js/wow.min.js"></script>
+
+	
+	<script type='text/javascript'>
+	// Parse Initialize
+	var app_id = "MNHlwqykaB2I3pHsXAFlOoJlZ92uLggHzyPGKSVG";
+	var javascript_key = "29XjgrXROWLoxOU27XAltcLZPxRxBkGwGJs5yUWg";
+	Parse.initialize(app_id, javascript_key);
+	Parse.serverURL = 'https://parseapi.back4app.com';
+
+	jQuery(document).ready(function() {	
+		
+		var user = window.localStorage.getItem("user");
+		
+		if (user == null || user == undefined || user == '' || user == 'null'){
+			$('#username').html("Log in");
+		} else {
+			console.log(user);
+			$('#username').html( user + " Welcome, click here to log out");
+		}
+		
+		$('#logout').click(function(){
+		if (user != "null"){
+			window.localStorage.setItem("user", "null");
+			$('#username').html("Log in");
+			user = "null";
+		FB.logout(function(response) {
+	  
+		});
+		} else{
+			window.location.href = '/login';
+		}
+			
+		
+		});
+		
+		
+	//post
+	 $("form").submit(function(event){
+		event.preventDefault();
+		var Feedback = Parse.Object.extend("Feedback");
+		var Name = $("input[name='Name']:checked").val();
+		var Email = $("input[name='Email']:checked").val();
+		var message = $("textarea[name='message']").val();
+
+		feedb = new Feedback();
+		feedb.set("name", Name);
+		feedb.set("age", Email);
+		feedb.set("comment", message);
+
+		feedb.save(null, {
+			success: function (res) {
+				console.log(res);
+			},
+			error: function (response, error) {
+				console.log('Error: ' + error.message);
+			}
+		});
+	});
+		
+		
+		
+	});
+</script> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+		<script src="js/tether.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+        <script src="js/evenfly.js"></script>
+        <script src="js/jquery.nicescroll.min.js"></script>
+        <script src="js/wow.min.js"></script>
+        <script src="js/snowstorm-min.js"></script>
+        <script src="js/video.js"></script>
+		<script>new WOW().init();</script>    
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+        <script src="js/custom.js"></script>
+<!-- JS PLUGINS -->
+		<script src="js/typed.js"></script>
+        <script src="plugins/owl-carousel/owl.carousel.min.js"></script>
+        <script src="js/jquery.easing.min.js"></script>
+        <script src="plugins/waypoints/jquery.waypoints.min.js"></script>
+        <script src="plugins/countTo/jquery.countTo.js"></script>
+        <script src="plugins/inview/jquery.inview.min.js"></script>
+        <script src="plugins/Lightbox/dist/js/lightbox.min.js"></script>
+        <script src="plugins/WOW/dist/wow.min.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!--     Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script> -->
+
+    <!-- Custom scripts for this template -->
+    <script src="js/grayscale.min.js"></script>
+    
+   
+   <script>
+      
+     $( document ).ready(function() {
+        
+               $.ajax({
+				url : "http://api.wunderground.com/api/b20b6bbf1fd069a8/geolookup/conditions/q/HK/HongKong.json",
+				dataType : "jsonp",
+				success : function(parsed_json) {
+					var temp_c = parsed_json['current_observation']['temp_c'];
+					document.getElementById("temperature").innerHTML = temp_c + "&deg;C";
+				}
+				});
+
+      $(".fav-btn").click(function(e){
+        mydata="texttitle="+$(this).closest(".fav-item").find(".title").text()+"&link="+$(this).closest(".fav-item").find(".title").attr("link"); 
+        
+        $.ajax({
+          url: "http://port-9000.305cde-jimmylsp666962607.codeanyapp.com/addfavourlist",          
+          type: "POST",
+          data: mydata,
+          success: function (result) {
+            alert(result);
+            console.log(result);
+          },
+          error: function(result){
+              console.log(result);
+            }
+        });
+        
+		  });
+
+ $(".fav-list").click(function(e){
+        
+        
+        $.ajax({
+          url: "http://port-9000.305cde-jimmylsp666962607.codeanyapp.com/readfavourlist",          
+          type: "POST",
+          data: "",
+          success: function (result) {
+            result = JSON.parse(result);
+            $("#allfav ul").empty();
+            $.each(result, function(i,fav){
+              $("#allfav ul").append('<div class="container"><div class="row"><div class="col-2"><span  id="' + fav._id + '"><i class="fa fa-trash fa-1x"></i></span></div><div class="col-10"><a href="'+
+                                     fav.link+'" target="_blank"><li class="list-group-item">'+fav.texttitle+'</li></a></div></div></div>');  
+            })
+            console.log(result);
+            //alert(result);
+          },
+          error: function(result){
+              console.log(result);
+            }
+        });
+        
+		  });
+      });
+     
+     $("#allfav ul").on("click", "span", function() {
+       console.log(this.id);
+//        $.ajax({
+//           url: "http://port-9000.305cde-jimmylsp666962607.codeanyapp.com/delfavourlist",          
+//           type: "POST",
+//           data: this.id,
+//           success: function (result) {
+//             result = JSON.parse(result);
+//             console.log(result);
+            
+            
+//             alert(result);
+//             console.log(result);
+//           },
+//           error: function(result){
+//               console.log(result);
+//             }
+//         });
+       
+       
+    $(this).parent().parent().remove();
+});
+
+       
+    </script>
+
+  </body>
+
+</html>
